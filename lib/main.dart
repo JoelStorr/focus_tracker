@@ -15,16 +15,26 @@ class MainApp extends StatelessWidget {
       theme: ThemeData.dark(),
       home: Builder(
         builder:
-            (context) => Center(
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const SecondScreen(),
+            (context) => Scaffold(
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text("Focus Time", style: TextStyle()),
+
+                    // Counter Element goes here
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const SecondScreen(),
+                          ),
+                        );
+                      },
+                      child: Text("Start"),
                     ),
-                  );
-                },
-                child: Text("Press Me for a new Page"),
+                  ],
+                ),
               ),
             ),
       ),
