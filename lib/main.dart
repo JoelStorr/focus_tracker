@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
-import "package:focus_tracker/Screens/focus_timer.dart";
+import "package:focus_tracker/screens/focus_timer.dart";
+import "package:focus_tracker/components/ui/aria_card.dart";
 
 void main() {
   runApp(const MainApp());
 }
 
+class Tab<T> {
+  const Tab({required this.title, required this.page});
+
+  final String title;
+  final T page;
+}
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
+
+  static List<Tab> tabs = [
+    Tab<FocusTimer>(title: "FocusTimer", page: FocusTimer()),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +45,16 @@ class MainApp extends StatelessWidget {
                       },
                       child: Text("Start"),
                     ),
+                    ...tabs.map((el) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(
+                            context,
+                          ).push(MaterialPageRoute(builder: (ctx) => el.page));
+                        },
+                        child: AriaCard(el.title),
+                      );
+                    }),
                   ],
                 ),
               ),
