@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
+class FocusTimer extends StatelessWidget {
+  const FocusTimer({super.key});
 
   @override
   Widget build(BuildContext context) {

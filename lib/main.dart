@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import "package:focus_tracker/Screens/second_screen.dart";
+import "package:focus_tracker/Screens/focus_timer.dart";
 
 void main() {
   runApp(const MainApp());
@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const SecondScreen(),
+                            builder: (context) => const FocusTimer(),
                           ),
                         );
                       },
