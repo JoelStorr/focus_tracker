@@ -23,7 +23,7 @@ class _FocusTimerState extends State<FocusTimer> {
   void updatedTime() {
     const duration = Duration(seconds: 1);
     Timer.periodic(duration, (Timer t) {
-      if (_roundTimeFrame == 0) t.cancel();
+      if (_roundTimeFrame == 1) t.cancel();
 
       setState(() {
         _roundTimeFrame -= 1;
