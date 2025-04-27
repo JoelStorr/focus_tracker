@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:focus_tracker/components/ui/time_selector.dart';
+import 'package:is_lock_screen/is_lock_screen.dart';
 import 'dart:async';
 
 class FocusTimer extends StatefulWidget {
@@ -9,11 +10,48 @@ class FocusTimer extends StatefulWidget {
   State<FocusTimer> createState() => _FocusTimerState();
 }
 
-class _FocusTimerState extends State<FocusTimer> {
+class _FocusTimerState extends State<FocusTimer> with WidgetsBindingObserver {
   double timeframe = 0;
   int _roundTimeFrame = 0;
   bool _hideSlider = false;
   bool _stopTimer = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+
+    final isBackground = state == AppLifecycleState.paused;
+    final isLocked = await isLockScreen();
+    if (isLocked == null) return;
+
+    // TODO: Figure out why locking of screen is not detected
+
+    print(isLocked);
+
+    if (isLocked) {
+      print("THe Phone was locked");
+    }
+
+    if (isBackground && isLocked) {
+      print("The Phone was locked");
+    }
+
+    if (isBackground && !isLocked) {
+      print("The App runs in the Background");
+    }
+  }
 
   void updateTimeFrame(double newTime) {
     setState(() {
